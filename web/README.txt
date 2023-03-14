@@ -3,7 +3,7 @@ lancer le docker compose :
 $ docker-compose up -d
 
 arrêt :
-$ docker compose stop
+$ docker-compose stop
 
 Stop and/or destroy the containers
 $ docker compose down
