@@ -1,0 +1,28 @@
+version: "3" 
+name: woodytoys
+services:
+  mail:
+    image: postfix:latest
+    hostname: mail.example.com
+    volumes:
+      - ./postfix/main.cf:/etc/postfix/main.cf
+      - ./postfix/virtual:/etc/postfix/virtual
+    ports:
+      - 25:25
+    networks:
+      - private-net
+  imap:
+    image: dovecot:latest
+    volumes:
+      - ./dovecot/dovecot.conf:/etc/dovecot/dovecot.conf
+      - ./dovecot/users:/etc/dovecot/users
+      - maildata:/var/mail
+    ports:
+      - 993:993
+    networks:
+      - private-net
+networks:
+  private-net:
+volumes:
+  db-data:
+  maildata:
