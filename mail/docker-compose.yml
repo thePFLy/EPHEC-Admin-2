@@ -1,28 +1,31 @@
-version: "3" 
-name: woodytoys
+version: '3'
+
 services:
-  mail:
-    image: postfix:latest
-    hostname: mail.example.com
-    volumes:
-      - ./postfix/main.cf:/etc/postfix/main.cf
-      - ./postfix/virtual:/etc/postfix/virtual
+  mailserver:
+    image: tvial/docker-mailserver
+    container_name: mailserver
+    hostname: mail.woodytoys.lab
+    domainname: woodytoys.lab
     ports:
-      - 25:25
-    networks:
-      - private-net
-  imap:
-    image: dovecot:latest
+      - "25:25"
+      - "143:143"
+      - "587:587"
     volumes:
-      - ./dovecot/dovecot.conf:/etc/dovecot/dovecot.conf
-      - ./dovecot/users:/etc/dovecot/users
       - maildata:/var/mail
-    ports:
-      - 993:993
-    networks:
-      - private-net
-networks:
-  private-net:
+      - mailstate:/var/mail-state
+      - maillogs:/var/log/mail
+      - ./config:/tmp/docker-mailserver
+    environment:
+      - ENABLE_SPAMASSASSIN=1
+      - ENABLE_CLAMAV=1
+      - ENABLE_POSTGREY=1
+      - ENABLE_FAIL2BAN=1
+      - ONE_DIR=1
+      - MAIL_HOSTNAME=mail.woodytoys.lab
+      - MAIL_DOMAIN=woodytoys.lab
+
+
 volumes:
-  db-data:
   maildata:
+  mailstate:
+  maillogs:
