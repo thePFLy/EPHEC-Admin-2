@@ -1,0 +1,5 @@
+user = root
+password = root
+hosts = 192.168.10.10
+dbname = mysqlboxmail
+query = SELECT CONCAT(mailbox_path, '/', mailbox_name) AS mailbox FROM mailbox WHERE username = '%s' AND active = '1'

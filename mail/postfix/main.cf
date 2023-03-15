@@ -1,1 +1,39 @@
-#tmp file
+# Nom du serv SMTP
+myhostname = mail.woodytoys.lab
+
+# Liste des domaines que le serveur accepte de relayer
+mydestination = mail.example.com, mail.woodytoys.lab, example.com, localhost.localdomain, localhost
+
+# Adresses IP locales
+mynetworks = 192.168.10.0/24 [::ffff:192.168.10.0]/64 [::1]/128
+
+# Protocoles à utiliser
+inet_protocols = ipv4
+
+# Délai max
+default_transport = smtp
+relay_transport = smtp
+smtp_destination_concurrency_limit = 2
+smtp_destination_rate_delay = 1s
+smtp_destination_recipient_limit = 1
+smtp_tls_security_level = may
+smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+
+# Config réception de messages
+virtual_mailbox_domains = mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf
+virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf
+virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf
+virtual_transport = dovecot
+
+# Config envoi de messages
+smtpd_sender_login_maps = mysql:/etc/postfix/mysql-virtual-sender-login-maps.cf
+smtpd_sender_restrictions = reject_authenticated_sender_login_mismatch, permit_sasl_authenticated, reject_unauthenticated_sender_login_mismatch, permit_mynetworks, reject
+
+# Config du serv SMTP pour les clients authentifiés
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_security_options = noanonymous
+smtpd_sasl_local_domain = $myhostname
+smtpd_sasl_authenticated_header = yes
+smtpd_recipient_restrictions = permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination
