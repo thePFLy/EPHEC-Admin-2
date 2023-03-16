@@ -1,5 +1,0 @@
-user = root
-password = root
-hosts = 192.168.10.10
-dbname = mysqlmailserver
-# query = SELECT 1 FROM virtual_domains WHERE name='%s'

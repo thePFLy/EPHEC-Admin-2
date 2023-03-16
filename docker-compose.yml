@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  mail:
+    build: ./mail
+    ports:
+      - "25:25"
+      - "143:143"
+      - "465:465"
+      - "587:587"
+      - "993:993"
+    volumes:
+      - ./mail/spool:/var/spool/postfix
+    networks:
+      intranet:
+        ipv4_address: 172.20.0.2
+  
+  # dns:
+  #   build: 
+  #   volumes:
+  #     - ./dns/named.conf:/etc/bind/named.conf
+  #     - ./dns/zones:/etc/bind/zones
+  #   ports:
+  #     - "53:53/udp"
+  #     - "53:53/tcp"
+  #   networks:
+  #     intranet:
+  #       ipv4_address: 172.20.0.3
+
+  # web:
+  #   build:
+  #   volumes:
+  #     - ./web:/usr/share/nginx/html
+  #   ports:
+  #     - "80:80"
+  #   networks:
+  #     intranet:
+  #       ipv4_address: 172.20.0.4
+
+networks:
+  intranet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
