@@ -1,0 +1,13 @@
+$TTL 604800
+@       IN      SOA     ns.woodytoys.intern.       4.woodytoys.intern. (
+                5               ; Serial
+                604800          ; Refresh
+                86400           ; Retry
+                2419200         ; Expire
+                604800 )        ; Negative Cache TTL
+
+woodytoys.intern.  IN      NS       ns.woodytoys.intern.
+
+dns             IN      A       192.168.0.2
+mail            IN      A       192.168.0.3
+web             IN      A       192.186.0.4
