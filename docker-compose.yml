@@ -1,31 +1,35 @@
 version: '3'
 
 services:
-  mail:
-    build: ./mail
-    ports:
-      - "25:25"
-      - "143:143"
-      - "465:465"
-      - "587:587"
-      - "993:993"
-    volumes:
-      - ./mail/spool:/var/spool/postfix
+  pc:
+    build:
+      context: pc/
+      dockerfile: Dockerfile
     networks:
       intranet:
-        ipv4_address: 172.20.0.2
+        ipv4_address: 192.168.20.5
+    dns:
+      - 192.168.20.3
+
+  mail:
+    build:
+      context: mail/
+      dockerfile: Dockerfile
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.2
+    dns:
+      - 192.168.20.3
   
-  # dns:
-  #   build: 
-  #   volumes:
-  #     - ./dns/named.conf:/etc/bind/named.conf
-  #     - ./dns/zones:/etc/bind/zones
-  #   ports:
-  #     - "53:53/udp"
-  #     - "53:53/tcp"
-  #   networks:
-  #     intranet:
-  #       ipv4_address: 172.20.0.3
+  dns:
+    build: 
+      context: DNS/
+      dockerfile: Dockerfile
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.3
+    dns:
+      - 192.168.20.3
 
   # web:
   #   build:
@@ -35,7 +39,7 @@ services:
   #     - "80:80"
   #   networks:
   #     intranet:
-  #       ipv4_address: 172.20.0.4
+  #       ipv4_address: 192.168.20.4
 
 networks:
   intranet:
@@ -43,4 +47,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.20.0.0/16
+        - subnet: 192.168.20.0/16

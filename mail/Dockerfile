@@ -5,6 +5,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     touch /var/log/mail.log
+    
 # config fichiers postfix
 COPY postfix/main.cf /etc/postfix/main.cf
 COPY postfix/master.cf /etc/postfix/master.cf
