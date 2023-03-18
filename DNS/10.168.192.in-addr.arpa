@@ -10,6 +10,6 @@ $ORIGIN 10.168.192.in-addr.arpa
 
         IN      NS       ns.woodytoys.intern.
 
-2       IN     PTR      ns.woodytoys.intern.
+2       IN     PTR      dns.woodytoys.intern.
 3       IN     PTR      mail.woodytoys.intern.
 4       IN     PTR      web.woodytoys.intern.
