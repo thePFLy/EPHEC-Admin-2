@@ -11,6 +11,16 @@ services:
     dns:
       - 192.168.20.3
 
+  pc2:
+    build:
+      context: pc/
+      dockerfile: Dockerfile
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.6
+    dns:
+      - 192.168.20.3
+
   mail:
     build:
       context: mail/
@@ -30,7 +40,7 @@ services:
         ipv4_address: 192.168.20.3
     dns:
       - 192.168.20.3
-
+  
   # web:
   #   build:
   #   volumes:
@@ -48,4 +58,3 @@ networks:
       driver: default
       config:
         - subnet: 192.168.20.0/16
-        

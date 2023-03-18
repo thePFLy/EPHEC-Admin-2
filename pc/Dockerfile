@@ -6,6 +6,7 @@ RUN apt-get update && \
         curl \
         wget \
         nano \
+        telnet \
         vim-tiny \
         iputils-ping \
         dnsutils \
