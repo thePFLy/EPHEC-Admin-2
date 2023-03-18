@@ -8,22 +8,16 @@ RUN apt-get update && \
         dnsutils \
         wget
 
-<<<<<<< HEAD
 RUN wget --user=ftp --password=ftp ftp://ftp.rs.internic.net/domain/db.cache -O /etc/bind/db.root
-COPY named.conf /etc/bind/named.conf
-COPY db.woodytoys.lab /etc/bind/db.woodytoys.lab
+COPY conf/named.conf /etc/bind/named.conf
+COPY conf/db.woodytoys.lab /etc/bind/db.woodytoys.lab
+COPY conf/db.20.168.192 /etc/bind/db.20.168.192
 
 # Change working directory to /var/cache/bind
 WORKDIR /var/cache/bind
 
 # Set permissions for /var/cache/bind
 RUN chmod -R 777 /var/cache/bind
-=======
-COPY named.conf /etc/bind/
-COPY woodytoys.intern /etc/bind/
-COPY named.conf.local /etc/bind
-COPY 10.168.192.in-addr.arpa /etc/bind
->>>>>>> main
 
 EXPOSE 53/udp
 EXPOSE 53/tcp
