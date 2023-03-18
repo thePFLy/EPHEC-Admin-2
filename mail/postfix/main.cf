@@ -1,6 +1,6 @@
 myhostname = mail.woodytoys.lab
 mydestination = mail.example.com, mail.woodytoys.lab, example.com, localhost.localdomain, localhost
-mynetworks = 172.20.0.0/16
+mynetworks = 192.168.20.0/16
 inet_protocols = ipv4
 virtual_mailbox_domains = woodytoys.lab
 virtual_mailbox_maps = hash:/etc/postfix/vmailbox
