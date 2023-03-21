@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 # installation des dépendances postfix & dovecot
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y postfix postfix-mysql telnet dovecot-mysql dovecot-core dovecot-imapd dovecot-pop3d && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y postfix postfix-mysql dovecot-lmtpd telnet dovecot-mysql dovecot-core dovecot-imapd dovecot-pop3d && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     touch /var/log/mail.log
@@ -14,10 +14,9 @@ COPY postfix/mysql-virtual-mailbox-maps.cf /etc/postfix/mysql-virtual-mailbox-ma
 COPY postfix/mysql-virtual-alias-maps.cf /etc/postfix/mysql-virtual-alias-maps.cf
 
 
-
-
 # config db
-COPY db-mail/createdb-mail.sql db-mail/createusers-mail.sql /docker-entrypoint-initdb.d/
+COPY db-mail/createdb-mail.sql config-sql/create-db.sql
+COPY db-mail/createusers-mail.sql config-sql/create-users.sql
 
 
 # config fichiers dovecots
@@ -48,5 +47,5 @@ RUN chown -R vmail:dovecot /etc/dovecot \
 EXPOSE 25 143 465 587 993
 
 
-CMD ["sh", "-c", "service mysql start; mysql -u root < config-sql/createdb-mail.sql; mysql -u root < config-sql/createusers-mail.sql; service postfix start; service dovecot start; tail -F /var/log/mail.log"]
+CMD ["sh", "-c", "service mysql start; mysql -u root < /createdb-mail.sql; mysql -u root < config-sql/createusers-mail.sql; service postfix start; service dovecot start; tail -F /var/log/mail.log"]
 
