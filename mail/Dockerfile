@@ -15,8 +15,8 @@ COPY postfix/mysql-virtual-alias-maps.cf /etc/postfix/mysql-virtual-alias-maps.c
 
 
 # config db
-COPY db-mail/createdb-mail.sql config-sql/create-db.sql
-COPY db-mail/createusers-mail.sql config-sql/create-users.sql
+COPY db-mail/createdb-mail.sql config-sql/createdb-mail.sql
+COPY db-mail/createusers-mail.sql config-sql/createusers-mail.sql
 
 
 # config fichiers dovecots
