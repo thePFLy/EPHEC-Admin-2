@@ -1,6 +1,7 @@
 CREATE database servermail;
 
-GRANT ALL PRIVILEGES ON servermail.* to 'mailUser'@'localhost' identified by 'root';
+GRANT ALL PRIVILEGES ON servermail.* TO 'mailUser'@'localhost' IDENTIFIED BY 'root';
+
 
 FLUSH PRIVILEGES;
 

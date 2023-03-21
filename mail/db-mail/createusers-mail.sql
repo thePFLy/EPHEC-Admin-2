@@ -1,7 +1,7 @@
 INSERT INTO `servermail`.`virtual_domains`
 (`id` ,`name`)
 VALUES
-('1', 'woodytoys.lab')
+('1', 'woodytoys.lab');
 
 INSERT INTO `servermail`.`virtual_users`
 (`id`, `domain_id`, `password` , `email`)
