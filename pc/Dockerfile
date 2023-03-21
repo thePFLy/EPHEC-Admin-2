@@ -6,11 +6,12 @@ RUN apt-get update && \
         curl \
         wget \
         nano \
-        telnet \
+        telnet\
         vim-tiny \
         iputils-ping \
         dnsutils \
         ssmtp \
+        mailutils\
         && rm -rf /var/lib/apt/lists/*
         
 COPY ssmtp.conf /etc/ssmtp/ssmtp.conf

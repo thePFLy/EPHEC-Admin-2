@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 # installation des dépendances postfix & dovecot
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y postfix dovecot-core dovecot-imapd dovecot-pop3d && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y postfix postfix-mysql telnet dovecot-mysql dovecot-core dovecot-imapd dovecot-pop3d && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     touch /var/log/mail.log
@@ -9,25 +9,44 @@ RUN apt-get update && \
 # config fichiers postfix
 COPY postfix/main.cf /etc/postfix/main.cf
 COPY postfix/master.cf /etc/postfix/master.cf
-COPY postfix/virtual /etc/postfix/virtual
-COPY postfix/vmailbox /etc/postfix/vmailbox
-COPY dovecot/dovecot.conf /etc/dovecot/dovecot.conf
+COPY postfix/mysql-virtual-mailbox-domains.cf /etc/postfix/mysql-virtual-mailbox-domains.cf
+COPY postfix/mysql-virtual-mailbox-maps.cf /etc/postfix/mysql-virtual-mailbox-maps.cf
+COPY postfix/mysql-virtual-alias-maps.cf /etc/postfix/mysql-virtual-alias-maps.cf
 
-#COPY postfix/mysql-virtual-mailbox-domains.cf /etc/postfix/mysql-virtual-mailbox-domains.cf 
-#COPY postfix/mysql-virtual-mailbox-maps.cf /etc/postfix/mysql-virtual-mailbox-maps.cf 
-#COPY postfix/mysql-virtual-alias-maps.cf /etc/mysql/mysql-virtual-alias-maps.cf
-#COPy postfix/mysql-virtual-email2email.cf /etc/postfix/mysql-virtual-email2email.cf
+
+
+
+# config db
+COPY db-mail/createdb-mail.sql db-mail/createusers-mail.sql /docker-entrypoint-initdb.d/
+
+
 # config fichiers dovecots
 COPY dovecot/dovecot.conf /etc/dovecot/dovecot.conf
-#COPY dovecot/dovecot-sql.conf.ext /etc/dovecot/dovecot-sql.conf
-# ports utiisés (SMTP SSL IMAP POP3)
+COPY dovecot/dovecot-sql.conf.ext /etc/dovecot/dovecot-sql.conf.ext
 
-# postmap
-COPY postfix/virtual /etc/postfix/virtual
-COPY postfix/vmailbox /etc/postfix/vmailbox
-RUN postmap /etc/postfix/virtual && postmap /etc/postfix/vmailbox
+COPY dovecot/10-auth.conf /etc/dovecot/conf.d/10-auth.conf
+COPY dovecot/10-mail.conf /etc/dovecot/conf.d/10-mail.conf
+COPY dovecot/10-master.conf /etc/dovecot/conf.d/10-master.conf
+
+COPY dovecot/auth-sql.conf.ext /etc/dovecot/conf.d/auth-sql.conf.ext
+COPY dovecot/10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf
+
+# Create folder for each domain registered in MySQL table
+RUN mkdir -p /var/mail/vhosts/example.com
+
+# Create vmail user and group with uid and gid of 5000
+RUN groupadd -g 5000 vmail && \
+    useradd -g vmail -u 5000 vmail -d /var/mail
+
+# Change owner of /var/mail folder to vmail user
+RUN chown -R vmail:vmail /var/mail
+
+RUN chown -R vmail:dovecot /etc/dovecot \
+    && chmod -R o-rwx /etc/dovecot
+
 
 EXPOSE 25 143 465 587 993
 
-CMD ["sh", "-c", "service postfix start && service dovecot start && tail -f /var/log/mail.log"]
+
+CMD ["sh", "-c", "service mysql start; mysql -u root < config-sql/createdb-mail.sql; mysql -u root < config-sql/createusers-mail.sql; service postfix start; service dovecot start; tail -F /var/log/mail.log"]
 
