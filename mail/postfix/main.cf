@@ -1,16 +1,14 @@
 myhostname = mail.woodytoys.lab
-mydestination = mail.woodytoys.lab, localhost.woodytoys.lab, localhost
-virtual_transport = dovecot
-mynetworks = 192.168.20.0/16
-inet_protocols = ipv4
-virtual_mailbox_domains = mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf
-virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf
-virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf
+mydomain = woodytoys.lab
+myorigin = $mydomain
+mydestination = mail.woodytoys.lab, localhost, localhost.$mydomain, $mydomain
+inet_interfaces = all
 
-smtpd_sasl_type = dovecot
-smtpd_sasl_path = private/auth
-smtpd_sasl_auth_enable = yes
-smtpd_recipient_restrictions =
-        permit_sasl_authenticated,
-        permit_mynetworks,
-        reject_unauth_destination
+home_mailbox = Maildir/
+smtpd_banner = $myhostname ESMTP $mail_name
+
+mynetworks = 192.168.0.0/16 [::1]/128
+smtpd_relay_restrictions = permit_mynetworks, reject
+maillog_file=/var/log/postfix.log
+debug_peer_list = woodytoys.lab
+debug_peer_level = 5

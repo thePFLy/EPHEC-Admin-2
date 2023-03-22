@@ -1,7 +1,0 @@
-# Database driver: mysql, pgsql, sqlite
-driver = mysql
-
-connect = host=127.0.0.1 dbname=servermail user=mailUser password=root
-
-password_query = SELECT email as user, password FROM virtual_users WHERE email='%u';
-

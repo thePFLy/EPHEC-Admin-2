@@ -15,5 +15,7 @@ RUN apt-get update && \
         && rm -rf /var/lib/apt/lists/*
         
 COPY ssmtp.conf /etc/ssmtp/ssmtp.conf
+RUN useradd -ms /bin/bash simon
+RUN useradd -ms /bin/bash sebastien
 
 CMD ["tail", "-f", "/dev/null"]
