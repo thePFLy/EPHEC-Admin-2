@@ -31,7 +31,7 @@ COPY dovecot/auth-sql.conf.ext /etc/dovecot/conf.d/auth-sql.conf.ext
 COPY dovecot/10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf
 
 # Create folder for each domain registered in MySQL table
-RUN mkdir -p /var/mail/vhosts/example.com
+RUN mkdir -p /var/mail/vhosts/woodytoys.lab
 
 # Create vmail user and group with uid and gid of 5000
 RUN groupadd -g 5000 vmail && \
@@ -43,6 +43,7 @@ RUN chown -R vmail:vmail /var/mail
 RUN chown -R vmail:dovecot /etc/dovecot \
     && chmod -R o-rwx /etc/dovecot
 
+RUN usermod -d /var/lib/mysql/ mysql
 
 EXPOSE 25 143 465 587 993
 

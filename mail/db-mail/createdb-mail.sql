@@ -1,9 +1,9 @@
 CREATE database servermail;
 
-GRANT ALL PRIVILEGES ON servermail.* TO 'mailUser'@'localhost' IDENTIFIED BY 'root';
+-- GRANT ALL PRIVILEGES ON servermail.* TO 'mailUser'@'localhost' IDENTIFIED BY 'root';
 
 
-FLUSH PRIVILEGES;
+-- FLUSH PRIVILEGES;
 
 USE servermail;
 
