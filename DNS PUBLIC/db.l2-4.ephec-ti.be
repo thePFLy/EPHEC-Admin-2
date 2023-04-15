@@ -1,3 +1,4 @@
+$ ORIGIN l2-4.ephec-ti.be.
 $TTL 604800
 
 @     IN     SOA     dns.l2-4.ephec-ti.be.     admin.l2-4.ephec-ti.be. (
