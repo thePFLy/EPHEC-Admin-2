@@ -5,7 +5,7 @@ $TTL 604800
 
                         5             ; serial
 
-                        604800        ; refresh
+                        21600        ; refresh
 
                         86400         ; retry
 
