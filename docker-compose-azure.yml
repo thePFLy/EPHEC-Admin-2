@@ -1,0 +1,94 @@
+version: '3'
+
+services:
+  pc:
+    image: admin2.azurecr.io/resolver:latest
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.5
+    dns:
+      - 192.168.20.3
+
+  pc2:
+    image: admin2.azurecr.io/pc:latest
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.6
+    dns:
+      - 192.168.20.3
+
+  mail:
+    image: admin2.azurecr.io/pc:latest
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.2
+    dns:
+      - 192.168.20.3
+  
+  dns:
+    image: admin2.azurecr.io/resolver:latest
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.3
+    dns:
+      - 192.168.20.3
+  
+  nginx:
+    image: nginx:1.23.3
+    ports:
+      - 80:80
+    volumes:
+      - ./web/src:/var/www/php
+      - ./web/.docker/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - php
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.4
+    dns:
+      - 192.168.20.3
+
+  php:
+    image: admin2.azurecr.io/web:latest
+    working_dir: /var/www/php
+    volumes:
+      - ./web/src:/var/www/php
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.11
+    dns:
+      - 192.168.20.3
+
+  mysql:
+    image: mysql/mysql-server:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: demo
+    volumes:
+      - ./web/.docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - mysqldata:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      interval: 5s
+      retries: 10
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.12
+    dns:
+      - 192.168.20.3
+
+volumes:
+
+  mysqldata:
+
+networks:
+  intranet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.20.0/16
