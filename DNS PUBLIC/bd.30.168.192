@@ -1,11 +1,11 @@
 $ORIGIN 30.168.192.in-addr.arpa.
 $TTL 86400
 @       IN      SOA     dns.l2-4.ephec-ti.be.      admin.l2-4.ephec-ti.be. (
-                        2001062501 ; serial
-                        21600      ;
-                        3600       ;
-                        604800     ;
-                        86400 )    ;
+                        5          ; Serial
+                        21600      ; Refresh
+                        86400       ; Retry
+                        2419200     ; Expire
+                        604800 )    ; Negative Cache TTL
 
         IN      NS      dns.l2-4.ephec-ti.be.
 
