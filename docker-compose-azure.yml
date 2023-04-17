@@ -3,7 +3,7 @@ version: '3'
 services:
   pc:
     image: admin2.azurecr.io/resolver:latest
-    networks:
+    networks: volume_woodytoys
       intranet:
         ipv4_address: 192.168.20.5
     dns:
@@ -11,7 +11,7 @@ services:
 
   pc2:
     image: admin2.azurecr.io/pc:latest
-    networks:
+    networks: volume_woodytoys
       intranet:
         ipv4_address: 192.168.20.6
     dns:
@@ -19,7 +19,7 @@ services:
 
   mail:
     image: admin2.azurecr.io/pc:latest
-    networks:
+    networks: volume_woodytoys
       intranet:
         ipv4_address: 192.168.20.2
     dns:
@@ -27,7 +27,7 @@ services:
   
   dns:
     image: admin2.azurecr.io/resolver:latest
-    networks:
+    networks: volume_woodytoys
       intranet:
         ipv4_address: 192.168.20.3
     dns:
@@ -81,7 +81,13 @@ services:
     dns:
       - 192.168.20.3
 
+
 volumes:
+  volume_woodytoys:
+    driver: azure_file
+    driver_opts:
+      share_name: partage-woodytoys
+      storage_account_name: woodytoys
 
   mysqldata:
 
