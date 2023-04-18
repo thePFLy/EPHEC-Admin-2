@@ -5,13 +5,13 @@ $TTL 604800
 
                         5             ; serial
 
-                        21600        ; refresh
+                        900        ; refresh
 
-                        86400         ; retry
+                        600         ; retry
 
-                        2419200       ; expire
+                        86400       ; expire
 
-                        604800 )      ; negative cachhe TTL
+                        3600 )      ; negative cachhe TTL
 
 l2-4.ephec-ti.be.  IN      NS       dns.l2-4.ephec-ti.be.
 
