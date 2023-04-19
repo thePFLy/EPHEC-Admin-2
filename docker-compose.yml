@@ -89,6 +89,27 @@ services:
     dns:
       - 192.168.20.3
 
+  dbmail:
+    build: 
+      context: dbmail/
+      dockerfile: Dockerfile
+    networks:
+      intranet:
+        ipv4_address: 192.168.20.13
+    dns:
+      - 192.168.20.3
+
+  # mail2:
+  #   build:
+  #     context: mail2/
+  #     dockerfile: Dockerfile
+  #   networks:
+  #     intranet:
+  #       ipv4_address: 192.168.20.14
+  #   dns:
+  #     - 192.168.20.3
+
+
 volumes:
 
   mysqldata:
