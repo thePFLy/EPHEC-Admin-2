@@ -13,9 +13,7 @@ $TTL 604800
 
                         3600 )      ; negative cachhe TTL
 
-@            IN      NS       ns.l2-4.ephec-ti.be.
-
-@            IN       A       192.168.30.2
+l2-4.ephec-ti.be.      IN      NS       ns.l2-4.ephec-ti.be.
 
 ns           IN       A       192.168.30.2
 
