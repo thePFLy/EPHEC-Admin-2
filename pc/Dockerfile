@@ -12,6 +12,7 @@ RUN apt-get update && \
         iputils-ping \
         dnsutils \
         ssmtp \
+        swaks\
         mailutils\
         && rm -rf /var/lib/apt/lists/*
 
