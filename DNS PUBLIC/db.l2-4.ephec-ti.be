@@ -15,8 +15,8 @@ $TTL 604800
 
 l2-4.ephec-ti.be.      IN      NS       ns.l2-4.ephec-ti.be.
 
-ns           IN       A       20.74.76.29
+ns           IN       A       4.231.224.34
 
-web          IN       A       20.74.76.29
+web          IN       A       4.231.224.34
 
-mail         IN       A       20.74.76.29
+mail         IN       A       4.231.224.34
