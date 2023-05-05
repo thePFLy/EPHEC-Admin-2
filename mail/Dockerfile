@@ -31,9 +31,6 @@ COPY spamassassin/local.cf /etc/spamassassin/local.cf
 COPY spamassassin/spamassassin /etc/default/spamassassin
 RUN adduser spamd --disabled-login
 
-# spam test
-COPY spamassassin/message.txt /home/user/message.txt
-
 # nouveaux utilisateurs
 COPY users/newuser.sh /usr/local/bin
 COPY users/user.txt /
