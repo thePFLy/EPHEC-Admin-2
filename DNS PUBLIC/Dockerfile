@@ -17,7 +17,7 @@ WORKDIR /var/cache/bind
 
 RUN chmod -R 777 /var/cache/bind
 
-EXPOSE -p 53/udp
-EXPOSE -p 53/tcp
+EXPOSE  53/udp
+EXPOSE  53/tcp
 
 CMD ["named", "-g"]
