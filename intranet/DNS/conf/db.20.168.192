@@ -1,0 +1,15 @@
+$ORIGIN 20.168.192.in-addr.arpa.
+$TTL 86400
+@       IN      SOA     dns.woodytoys.lab.      4.woodytoys.lab. (
+                        2001062501 ; serial
+                        21600      ;
+                        3600       ;
+                        604800     ;
+                        86400 )    ;
+
+        IN      NS      dns.woodytoys.lab.
+
+
+2       IN      PTR     mail.woodytoys.lab.
+3       IN      PTR     dns.woodytoys.lab.
+4       IN      PTR     web.woodytoys.lab.

@@ -1,127 +1,124 @@
-version: '3'
-
+version: "3"
 services:
-  pc:
-    build:
-      context: pc/
-      dockerfile: Dockerfile
-    networks:
-      intranet:
-        ipv4_address: 192.168.20.5
+    mail:
+        build:
+            context: public/mail
+            dockerfile: Dockerfile
+        networks:
+            intranet:
+                ipv4_address: 192.168.20.2
+        dns: 192.168.20.3
+        volumes:
+            - ssl_private:/etc/ssl/private
+            - ssl_certs:/etc/ssl/certs
     dns:
-      - 192.168.20.3
+        build:
+            context: intranet/DNS
+            dockerfile: Dockerfile
+        networks:
+            intranet:
+                ipv4_address: 192.168.20.3
+        dns: 192.168.20.3
 
-  pc2:
-    build:
-      context: pc/
-      dockerfile: Dockerfile
-    networks:
-      intranet:
-        ipv4_address: 192.168.20.6
-    dns:
-      - 192.168.20.3
+    nginx:
+        image: nginx:1.23.3
+        ports:
+            - 80:80
+        volumes:
+            - ./web/src:/var/www/php
+            - ./web/.docker/nginx/conf.d:/etc/nginx/conf.d
+        depends_on:
+            - php
+        networks:
+            intranet:
+                ipv4_address: 192.168.20.4
+        dns: 192.168.20.3
+    
+    pc:
+        build:
+            context: intranet/pc
+            dockerfile: Dockerfile
+        networks:
+            intranet:
+                ipv4_address: 192.168.20.5
+        dns: 192.168.20.3
 
-  mail:
-    build:
-      context: mail/
-      dockerfile: Dockerfile
-    networks:
-      intranet:
-        ipv4_address: 192.168.20.2
-    dns:
-      - 192.168.20.3
-    volumes:
-      - ssl_private:/etc/ssl/private
-      - ssl_certs:/etc/ssl/certs
-  
-  dns:
-    build: 
-      context: DNS/
-      dockerfile: Dockerfile
-    networks:
-      intranet:
-        ipv4_address: 192.168.20.3
-    dns:
-      - 192.168.20.3
-  
-  nginx:
-    image: nginx:1.23.3
-    ports:
-      - 80:80
-    volumes:
-      - ./web/src:/var/www/php
-      - ./web/.docker/nginx/conf.d:/etc/nginx/conf.d
-    depends_on:
-      - php
-    networks:
-      intranet:
-        ipv4_address: 192.168.20.4
-    dns:
-      - 192.168.20.3
+    pc2:
+        build:
+            context: intranet/pc
+            dockerfile: Dockerfile
+        networks:
+            intranet:
+                ipv4_address: 192.168.20.6
+        dns: 192.168.20.3
 
-  php:
-    build: ./web/.docker/php
-    working_dir: /var/www/php
-    volumes:
-      - ./web/src:/var/www/php
-    depends_on:
-      mysql:
-        condition: service_healthy
-    networks:
-      intranet:
-        ipv4_address: 192.168.20.11
-    dns:
-      - 192.168.20.3
+    php:
+        build: intranet/web/.docker/php
+        working_dir: /var/www/php
+        volumes:
+            - ./web/src:/var/www/php
+        depends_on:
+            mysql:
+                condition: service_healthy
+        networks:
+            intranet:
+                ipv4_address: 192.168.20.11
+        dns: 192.168.20.3
 
-  mysql:
-    image: mysql/mysql-server:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_ROOT_HOST: "%"
-      MYSQL_DATABASE: demo
-    volumes:
-      - ./web/.docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      - mysqldata:/var/lib/mysql
-    healthcheck:
-      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
-      interval: 5s
-      retries: 10
-    networks:
-      intranet:
-        ipv4_address: 192.168.20.12
-    dns:
-      - 192.168.20.3
+    mysql:
+        image: mysql/mysql-server:8.0
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: demo
+        volumes:
+            - ./web/.docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+            - mysqldata:/var/lib/mysql
+        healthcheck:
+            test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+            interval: 5s
+            retries: 10
+        networks:
+            intranet:
+                ipv4_address: 192.168.20.12
+        dns: 192.168.20.3
+            
+    dns_public:
+        build:
+            context: public/dns_public
+            dockerfile: Dockerfile
+        ports:
+            - "53:53/udp"
+            - "53:53/tcp"
+        networks:
+            public:
+                ipv4_address: 192.168.30.3
+        dns: 192.168.30.3
 
-  # dbmail:
-  #   build: 
-  #     context: dbmail/
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     intranet:
-  #       ipv4_address: 192.168.20.13
-  #   dns:
-  #     - 192.168.20.3
-
-  # mail2:
-  #   build:
-  #     context: mail2/
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     intranet:
-  #       ipv4_address: 192.168.20.14
-  #   dns:
-  #     - 192.168.20.3
-
+    # mail_public:
+    #     build:
+    #         context: public/mail
+    #         dockerfile: Dockerfile
+    #     volumes:
+    #         - ssl_private:/etc/ssl/private
+    #         - ssl_certs:/etc/ssl/certs
+    #     networks:
+    #         public:
+    #             ipv4_address: 192.168.30.2
+    #     dns: 192.168.30.3
 
 volumes:
-  ssl_private:
-  ssl_certs:
-  mysqldata:
-
+    ssl_private:
+    ssl_certs:
+    mysqldata:
 networks:
-  intranet:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.20.0/16
+    intranet:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 192.168.20.0/24
+    public:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 192.168.30.0/24

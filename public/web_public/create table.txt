@@ -1,0 +1,5 @@
+CREATE TABLE jouets ( id int NOT NULL AUTO_INCREMENT PRIMARY KEY, nom varchar(255) NOT NULL, quantité int NOT NULL );
+
+insert into jouets (nom, quantité) values ('robot', 100);
+insert into jouets (nom, quantité) values ('soldat', 33);
+insert into jouets (nom, quantité) values ('camion', 59);
