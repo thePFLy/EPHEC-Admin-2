@@ -7,10 +7,18 @@ services:
         networks:
             intranet:
                 ipv4_address: 192.168.20.2
-        dns: 192.168.20.3
+        dns: 192.168.20.3:53
         volumes:
             - ssl_private:/etc/ssl/private
             - ssl_certs:/etc/ssl/certs
+        ports:
+            - "25:25"
+            - "110:110"
+            - "143:143"
+            - "465:465"
+            - "783:783"
+            - "995:995"
+            - "587:587"
     dns:
         build:
             context: intranet/DNS
@@ -18,7 +26,10 @@ services:
         networks:
             intranet:
                 ipv4_address: 192.168.20.3
-        dns: 192.168.20.3
+        dns: 192.168.20.3:5353
+        ports:
+        - "5353:53"
+
 
     nginx:
         image: nginx:1.23.3
@@ -32,7 +43,7 @@ services:
         networks:
             intranet:
                 ipv4_address: 192.168.20.4
-        dns: 192.168.20.3
+        dns: 192.168.20.3:5353
     
     pc:
         build:
@@ -41,7 +52,7 @@ services:
         networks:
             intranet:
                 ipv4_address: 192.168.20.5
-        dns: 192.168.20.3
+        dns: 192.168.20.3:5353
 
     pc2:
         build:
@@ -50,7 +61,7 @@ services:
         networks:
             intranet:
                 ipv4_address: 192.168.20.6
-        dns: 192.168.20.3
+        dns: 192.168.20.3:5353
 
     php:
         build: intranet/web/.docker/php
@@ -63,7 +74,7 @@ services:
         networks:
             intranet:
                 ipv4_address: 192.168.20.11
-        dns: 192.168.20.3
+        dns: 192.168.20.3:5353
 
     mysql:
         image: mysql/mysql-server:8.0
@@ -81,20 +92,18 @@ services:
         networks:
             intranet:
                 ipv4_address: 192.168.20.12
-        dns: 192.168.20.3
+        dns: 192.168.20.3:5353
             
     dns_public:
         build:
             context: public/dns_public
             dockerfile: Dockerfile
-        ports:
-            - "53:53/udp"
-            - "53:53/tcp"
         networks:
             public:
                 ipv4_address: 192.168.30.3
-        dns: 192.168.30.3
-
+        dns: 192.168.30.3:5300
+        ports:
+            - "5300:53"
     # mail_public:
     #     build:
     #         context: public/mail
@@ -105,8 +114,15 @@ services:
     #     networks:
     #         public:
     #             ipv4_address: 192.168.30.2
-    #     dns: 192.168.30.3
-
+    #     dns: 192.168.30.3:5300
+        # ports:
+        #     - "2525:25"
+        #     - "1100:110"
+        #     - "1430:143"
+        #     - "4650:465"
+        #     - "7830:783"
+        #     - "9950:995"
+        #     - "5870:587"
 volumes:
     ssl_private:
     ssl_certs:
