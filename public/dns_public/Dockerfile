@@ -8,6 +8,7 @@ RUN apt-get update && \
         dnsutils \
         wget
 
+RUN wget --user=ftp --password=ftp ftp://ftp.rs.internic.net/domain/db.cache -O /etc/bind/db.root
 COPY named.conf /etc/bind/named.conf
 COPY named.conf.log /etc/bind/named.conf.log
 COPY db.l2-4.ephec-ti.be /etc/bind/db.l2-4.ephec-ti.be
