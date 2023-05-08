@@ -1,7 +1,7 @@
 $ORIGIN l2-4.ephec-ti.be.
 $TTL 3600
 @       IN      SOA     dns.l2-4.ephec-ti.be.     admin.l2-4.ephec-ti.be. (
-                        2022032101      ; serial number
+                        2023050601      ; serial number
                         3600            ; refresh period
                         1800            ; retry period
                         604800          ; expire time

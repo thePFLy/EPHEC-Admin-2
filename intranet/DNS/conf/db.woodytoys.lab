@@ -1,6 +1,7 @@
+$ORIGIN woodytoys.lab.
 $TTL 604800
 @       IN      SOA     dns.woodytoys.lab.       4.woodytoys.lab. (
-                5               ; Serial
+                2023050601      ; Serial
                 604800          ; Refresh
                 86400           ; Retry
                 2419200         ; Expire
