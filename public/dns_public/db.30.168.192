@@ -1,6 +1,6 @@
 $ORIGIN 30.168.192.in-addr.arpa.
 $TTL 86400
-@       IN      SOA     dns.l2-4.ephec-ti.be.      admin.l2-4.ephec-ti.be. (
+@       IN      SOA     ns.l2-4.ephec-ti.be.      admin.l2-4.ephec-ti.be. (
                         2023050601  ; Serial
                         900         ; Refresh
                         600         ; Retry
@@ -8,7 +8,7 @@ $TTL 86400
                         3600        ; TTL min
                         )
 
-@       IN      NS      dns.l2-4.ephec-ti.be.
+@       IN      NS      ns.l2-4.ephec-ti.be.
 
 2       IN      PTR     mail.l2-4.ephec-ti.be.
 3       IN      PTR     dns.l2-4.ephec-ti.be.
