@@ -19,16 +19,17 @@ services:
             - "783:783"
             - "995:995"
             - "587:587"
-    dns:
-        build:
-            context: intranet/DNS
-            dockerfile: Dockerfile
-        networks:
-            intranet:
-                ipv4_address: 192.168.20.3
-        dns: 192.168.20.3
-        ports:
-        - "5353:53"
+
+    # dns:
+    #     build:
+    #         context: intranet/DNS
+    #         dockerfile: Dockerfile
+    #     networks:
+    #         intranet:
+    #             ipv4_address: 192.168.20.3
+    #     dns: 192.168.20.3
+    #     ports:
+    #     - "5353:53"
 
 
     nginx:
@@ -103,7 +104,8 @@ services:
                 ipv4_address: 192.168.30.3
         dns: 192.168.30.3
         ports:
-            - "5300:53"
+            - "53:53"
+
     # mail_public:
     #     build:
     #         context: public/mail
