@@ -11,6 +11,6 @@ $TTL 3600
 @   IN  NS      ns.l2-4.ephec-ti.be.
 @   IN  MX  10  mail.l2-4.ephec-ti.be.
 
-mail    IN      A   192.168.30.2
-dns     IN      A   192.168.30.3
-web     IN      A   192.168.30.4
+mail    IN      A   79.137.81.65
+dns     IN      A   79.137.81.65
+web     IN      A   79.137.81.65
