@@ -1,7 +1,7 @@
-myhostname = mail.woodytoys.lab
-mydomain = woodytoys.lab
+myhostname = mail.l2-4.ephec-ti.be
+mydomain = l2-4.ephec-ti.be
 myorigin = $mydomain
-mydestination = mail.woodytoys.lab, localhost, localhost.$mydomain, $mydomain
+mydestination = $myhostname localhost.$mydomain localhost $mydomain
 inet_interfaces = all
 
 home_mailbox = Maildir/
@@ -9,6 +9,7 @@ smtpd_banner = $myhostname ESMTP $mail_name
 
 mynetworks = 192.168.0.0/16 [::1]/128
 smtpd_relay_restrictions = permit_mynetworks, reject
+
 maillog_file=/var/log/postfix.log
 debug_peer_list = woodytoys.lab
 debug_peer_level = 5
@@ -24,3 +25,7 @@ smtpd_use_tls=yes
 smtpd_tls_auth_only = yes
 smtp_tls_security_level = may
 smtpd_tls_security_level = may
+
+smtpd_milters = unix:/var/run/opendkim/opendkim.sock
+non_smtpd_milters = unix:/var/run/opendkim/opendkim.sock
+

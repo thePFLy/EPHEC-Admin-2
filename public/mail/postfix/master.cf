@@ -12,3 +12,6 @@ submission inet n       -       -       -       -       smtpd
 spamassassin unix -     n       n       -       -       pipe
 user=spamd argv=/usr/bin/spamc -f -e  
 /usr/sbin/sendmail -oi -f ${sender} ${recipient}
+
+policyd-spf  unix  -       n       n       -       0       spawn
+    user=policyd-spf argv=/usr/bin/policyd-spf

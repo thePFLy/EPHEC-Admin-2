@@ -11,10 +11,19 @@ RUN apt update && \
         ca-certificates\
         net-tools\
         spamassassin\
+        opendkim\
+        opendkim-tools\
+        postfix-policyd-spf-python\
         spamc
 
     
 VOLUME ["/ssl_private", "/ssl_certs"]
+
+# dkim
+RUN mkdir -p /etc/opendkim/keys
+RUN chown opendkim:opendkim /etc/opendkim/keys/mail.private
+COPY /opendkim/opendkim.conf /etc/opendkim.conf
+RUN opendkim-genkey -b 4096 -d l2-4.ephec-ti.be -D /etc/opendkim/keys -s mail -v
 
 # ssl script
 COPY ssl/init_ssl.sh /usr/local/bin/
