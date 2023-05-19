@@ -5,7 +5,7 @@ services:
             context: public/mail
             dockerfile: Dockerfile
         networks:
-            intranet:
+            public:
                 ipv4_address: 192.168.30.2
         dns: 192.168.30.3
         volumes:
