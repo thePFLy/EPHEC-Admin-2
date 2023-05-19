@@ -12,7 +12,6 @@ RUN wget --user=ftp --password=ftp ftp://ftp.rs.internic.net/domain/db.cache -O 
 COPY named.conf /etc/bind/named.conf
 COPY named.conf.log /etc/bind/named.conf.log
 COPY db.l2-4.ephec-ti.be /etc/bind/db.l2-4.ephec-ti.be
-COPY db.30.168.192 /etc/bind/db.30.168.192
 
 WORKDIR /var/cache/bind
 
@@ -23,7 +22,7 @@ RUN chown bind:bind /var/cache/bind && \
     chmod 755 /var/cache/bind
 
 
-EXPOSE  53/udp
-EXPOSE  53/tcp
+EXPOSE  5300/udp
+EXPOSE  5300/tcp
 
 CMD ["named", "-g"]
