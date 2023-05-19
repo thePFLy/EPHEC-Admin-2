@@ -1,0 +1,18 @@
+$ORIGIN l2-4.ephec-ti.be.
+$TTL 86400
+
+@   IN  SOA     dns.l2-4.ephec-ti.be. hostmaster.l2-4.ephec-ti.be. (
+                2022031501  ; Serial
+                3600        ; Refresh
+                1800        ; Retry
+                604800      ; Expire
+                86400       ; Minimum TTL
+                )
+
+@   IN  NS      soa.l2-4.ephec-ti.be.
+@   IN  MX  10  mail.l2-4.ephec-ti.be.
+
+dns  IN A 79.137.81.65
+soa  IN A 79.137.81.65
+www  IN A 79.137.81.65
+mail IN A 79.137.81.65
