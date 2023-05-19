@@ -92,7 +92,7 @@ services:
     #         intranet:
     #             ipv4_address: 192.168.20.12
     #     dns: 192.168.20.3
-     dns_public:
+     dns:
         build:
             context: public/dns/resolver/
             dockerfile: Dockerfile
