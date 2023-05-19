@@ -12,5 +12,5 @@ $TTL 3600
 @   IN  MX  10  mail.l2-4.ephec-ti.be.
 
 mail    IN      A   79.137.81.65
-dns     IN      A   79.137.81.65
+ns     IN      A   79.137.81.65
 web     IN      A   79.137.81.65
