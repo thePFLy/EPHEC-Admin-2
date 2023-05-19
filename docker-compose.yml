@@ -104,7 +104,7 @@ services:
                 ipv4_address: 192.168.30.3
         dns: 192.168.30.3
         ports:
-            - "53:53"
+            - "5300:5300"
 
     # mail_public:
     #     build:
