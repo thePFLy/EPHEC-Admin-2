@@ -29,3 +29,10 @@ smtpd_tls_security_level = may
 smtpd_milters = unix:/var/run/opendkim/opendkim.sock
 non_smtpd_milters = unix:/var/run/opendkim/opendkim.sock
 
+policyd-spf_time_limit = 3600
+smtpd_recipient_restrictions =
+   permit_mynetworks,
+   permit_sasl_authenticated,
+   reject_unauth_destination,
+   check_policy_service unix:private/policyd-spf
+
