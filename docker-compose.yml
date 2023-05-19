@@ -7,7 +7,8 @@ services:
         networks:
             public:
                 ipv4_address: 192.168.30.2
-        dns: 192.168.30.3
+        dns:
+            - "192.168.30.3:49700"
         volumes:
             - ssl_private:/etc/ssl/private
             - ssl_certs:/etc/ssl/certs
@@ -30,9 +31,7 @@ services:
     #     dns: 192.168.20.3
     #     ports:
     #     - "5353:53"
-
-
-    # nginx:
+     # nginx:
     #     image: nginx:1.23.3
     #     ports:
     #         - 80:80
@@ -45,7 +44,7 @@ services:
     #         intranet:
     #             ipv4_address: 192.168.20.4
     #     dns: 192.168.20.3
-    
+
     # pc:
     #     build:
     #         context: intranet/pc
@@ -63,8 +62,7 @@ services:
     #         intranet:
     #             ipv4_address: 192.168.20.6
     #     dns: 192.168.20.3
-
-    # php:
+     # php:
     #     build: intranet/web/.docker/php
     #     working_dir: /var/www/php
     #     volumes:
@@ -76,7 +74,7 @@ services:
     #         intranet:
     #             ipv4_address: 192.168.20.11
     #     dns: 192.168.20.3:5353
-    
+
     # mysql:
     #     image: mysql/mysql-server:8.0
     #     environment:
@@ -94,17 +92,29 @@ services:
     #         intranet:
     #             ipv4_address: 192.168.20.12
     #     dns: 192.168.20.3
-            
-    dns_public:
+     dns:
         build:
-            context: public/dns_public
+            context: public/dns/resolver/
             dockerfile: Dockerfile
         networks:
             public:
                 ipv4_address: 192.168.30.3
-        dns: 192.168.30.3
+        dns:
+            - "192.168.30.3:49700"
         ports:
-            - "5300:5300"
+            - "49700:53"
+
+    soa:
+        build:
+            context: public/dns/soa/
+            dockerfile: Dockerfile
+        networks:
+            public:
+                ipv4_address: 192.168.30.5
+        dns:
+          - "192.168.30.3:49700"
+        ports:
+          - "53:53/udp"
 
     # mail_public:
     #     build:
@@ -117,7 +127,7 @@ services:
     #         public:
     #             ipv4_address: 192.168.30.2
     #     dns: 192.168.30.3:5300
-        # ports:
+      # ports:
         #     - "2525:25"
         #     - "1100:110"
         #     - "1430:143"
@@ -133,8 +143,9 @@ services:
         networks:
             public:
                 ipv4_address: 192.168.30.6
-        dns: 192.168.30.3
-        
+        dns:
+            - "192.168.30.3:49700"
+
 
 volumes:
     ssl_private:

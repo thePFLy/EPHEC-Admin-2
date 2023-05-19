@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        bind9 \
+        bind9utils \
+        bind9-doc \
+        dnsutils
+
+COPY named.conf /etc/bind/
+COPY *.zone /etc/bind/
+
+EXPOSE 53/udp
+
+CMD ["named", "-g"]
