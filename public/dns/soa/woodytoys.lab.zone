@@ -1,7 +1,7 @@
 $ORIGIN woodytoys.lab.
 $TTL 86400
 
-@   IN  SOA     dns.woodytoys.lab. hostmaster.woodytoys.lab. (
+@   IN  SOA     ns.woodytoys.lab. hostmaster.woodytoys.lab. (
                 2022031501  ; Serial
                 3600        ; Refresh
                 1800        ; Retry
@@ -9,11 +9,11 @@ $TTL 86400
                 86400       ; Minimum TTL
                 )
 
-@   IN  NS      dns.woodytoys.lab.
+@   IN  NS      ns.woodytoys.lab.
 @   IN  NS      soa.woodytoys.lab.
 @   IN  MX  10  mail.woodytoys.lab.
 
-dns  IN A 192.168.30.3
+ns   IN A 192.168.30.3
 soa  IN A 192.168.30.5
 www  IN A 192.168.30.4
 b2b  IN A 192.168.30.4
