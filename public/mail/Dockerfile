@@ -21,12 +21,13 @@ VOLUME ["/ssl_private", "/ssl_certs"]
 
 # dkim
 RUN mkdir -p /etc/opendkim/keys
-RUN chown opendkim:opendkim /etc/opendkim/keys/mail.private
 COPY /opendkim/opendkim.conf /etc/opendkim.conf
 RUN opendkim-genkey -b 4096 -d l2-4.ephec-ti.be -D /etc/opendkim/keys -s mail -v
+RUN chown opendkim:opendkim /etc/opendkim/keys/mail.private
+
 
 # spf
-COPY /postfix/spf/policyd-spf.conf /etc/postfix-policyd-spf-python/policyd-spf.conf
+COPY /spf/policyd-spf.conf /etc/postfix-policyd-spf-python/policyd-spf.conf
 
 # ssl script
 COPY ssl/init_ssl.sh /usr/local/bin/

@@ -31,7 +31,9 @@ services:
     #     dns: 192.168.20.3
     #     ports:
     #     - "5353:53"
-     # nginx:
+
+
+    # nginx:
     #     image: nginx:1.23.3
     #     ports:
     #         - 80:80
@@ -62,7 +64,8 @@ services:
     #         intranet:
     #             ipv4_address: 192.168.20.6
     #     dns: 192.168.20.3
-     # php:
+
+    # php:
     #     build: intranet/web/.docker/php
     #     working_dir: /var/www/php
     #     volumes:
@@ -92,9 +95,10 @@ services:
     #         intranet:
     #             ipv4_address: 192.168.20.12
     #     dns: 192.168.20.3
-     dns:
+
+    dns:
         build:
-            context: public/dns/resolveur/
+            context: public/dns/resolver/
             dockerfile: Dockerfile
         networks:
             public:
@@ -127,7 +131,7 @@ services:
     #         public:
     #             ipv4_address: 192.168.30.2
     #     dns: 192.168.30.3:5300
-      # ports:
+        # ports:
         #     - "2525:25"
         #     - "1100:110"
         #     - "1430:143"
@@ -146,7 +150,6 @@ services:
         dns:
             - "192.168.30.3:49700"
 
-
 volumes:
     ssl_private:
     ssl_certs:
@@ -162,3 +165,4 @@ networks:
         ipam:
             config:
                 - subnet: 192.168.30.0/24
+                                                            
