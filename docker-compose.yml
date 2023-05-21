@@ -94,7 +94,7 @@ services:
     #     dns: 192.168.20.3
      dns:
         build:
-            context: public/dns/resolver/
+            context: public/dns/resolveur/
             dockerfile: Dockerfile
         networks:
             public:
