@@ -16,3 +16,6 @@ ns   IN A 79.137.81.65
 soa  IN A 79.137.81.65
 www  IN A 79.137.81.65
 mail IN A 79.137.81.65
+
+l2-4.ephec-ti.be.     IN     TXT     "v=spf1 mx -all"
+_dmarc.l2-4.ephec-ti.be. IN TXT "v=DMARC1; p=quarantine; sp=quarantine; rua=mailto:tmpmail@l2-4.ephec-ti.be.; ruf=mailto:tmpmail@l2-4.ephec-ti.be.; fo=1" 
