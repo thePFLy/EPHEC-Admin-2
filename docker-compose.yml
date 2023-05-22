@@ -118,7 +118,7 @@ services:
         dns:
           - "192.168.30.3:49700"
         ports:
-          - "53:53/udp"
+          - "5300:53/udp"
 
     # mail_public:
     #     build:
@@ -142,7 +142,7 @@ services:
 
     pc_public:
         build:
-            context: intranet/pc
+            context: public/pc
             dockerfile: Dockerfile
         networks:
             public:

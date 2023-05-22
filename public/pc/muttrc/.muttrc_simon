@@ -1,0 +1,12 @@
+set from="simon@l2-4.ephec-ti.be.lab"
+set ssl_starttls=no
+set ssl_force_tls=no
+set smtp_url = "smtp://mail.l2-4.ephec-ti.be.lab:25"
+
+# Imap settings
+set spoolfile="imap://simon@mail.l2-4.ephec-ti.be/"
+set imap_user = "simon@l2-4.ephec-ti.be"
+set imap_pass = "simon"
+set folder = "imap://simon@mail.l2-4.ephec-ti.be/"
+
+set editor = "nano"
