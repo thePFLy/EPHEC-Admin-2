@@ -11,7 +11,7 @@ mynetworks = 192.168.0.0/16 [::1]/128
 smtpd_relay_restrictions = permit_mynetworks, reject
 
 maillog_file=/var/log/postfix.log
-debug_peer_list = woodytoys.lab
+debug_peer_list = l2-4.ephec-ti.be
 debug_peer_level = 5
 
 smtpd_tls_cert_file=/etc/ssl/certs/server.crt
