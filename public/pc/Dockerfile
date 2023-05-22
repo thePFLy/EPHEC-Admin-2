@@ -24,8 +24,8 @@ RUN useradd -ms /bin/bash julien
 
 # configuration muttrc pour les pc
 COPY /muttrc/.muttrc_simon /home/simon/.muttrc
-COPY /muttrc/.muttrc_julien /home/julien/.muttrc
-COPY /muttrc/.muttrc_sebastien /home/sebastien/.muttrc
+# COPY /muttrc/.muttrc_julien /home/julien/.muttrc
+# COPY /muttrc/.muttrc_sebastien /home/sebastien/.muttrc
 
 
 CMD ["tail", "-f", "/dev/null"]
