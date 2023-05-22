@@ -6,9 +6,10 @@ RUN apt-get update && \
         bind9utils \
         bind9-doc \
         dnsutils
-
+    
 COPY named.conf /etc/bind/
 COPY *.zone /etc/bind/
+COPY l2-4.ephec-ti.be.zone.signed /etc/bind/
 
 EXPOSE 53/udp
 

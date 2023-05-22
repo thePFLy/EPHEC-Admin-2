@@ -13,7 +13,7 @@ $TTL 86400
 @   IN  NS      soa.woodytoys.lab.
 @   IN  MX  10  mail.woodytoys.lab.
 
-ns   IN A 192.168.30.3
+ns  IN A 192.168.30.3
 soa  IN A 192.168.30.5
 www  IN A 192.168.30.4
 b2b  IN A 192.168.30.4
