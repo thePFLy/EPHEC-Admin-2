@@ -8,17 +8,10 @@ services:
             public:
                 ipv4_address: 192.168.30.2
         dns:
-<<<<<<< Updated upstream
             - "192.168.30.3:49700"
         volumes:
             - ssl_private:/etc/ssl/private
             - ssl_certs:/etc/ssl/certs
-=======
-            - "192.168.30.5:5300"
-        #volumes:
-        #    - ssl_private:/etc/ssl/private
-        #    - ssl_certs:/etc/ssl/certs
->>>>>>> Stashed changes
         ports:
             - "25:25"
             - "110:110"
