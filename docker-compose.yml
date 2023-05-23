@@ -8,7 +8,7 @@ services:
             public:
                 ipv4_address: 192.168.30.2
         dns:
-            - "192.168.30.5:5300"
+            - "192.168.30.3:49700"
         volumes:
             - ssl_private:/etc/ssl/private
             - ssl_certs:/etc/ssl/certs
@@ -96,17 +96,17 @@ services:
     #             ipv4_address: 192.168.20.12
     #     dns: 192.168.20.3
 
-    #dns:
-     #   build:
-      #      context: public/dns/resolver/
-      #      dockerfile: Dockerfile
-      #  networks:
-      #      public:
-      #          ipv4_address: 192.168.30.3
-      #  dns:
-      #      - "192.168.30.5:5300"
-      #  ports:
-      #      - "49700:53"
+    dns:
+        build:
+            context: public/dns/resolver/
+            dockerfile: Dockerfile
+        networks:
+            public:
+                ipv4_address: 192.168.30.3
+        dns:
+            - "192.168.30.3:49700"
+        ports:
+            - "49700:53"
 
     soa:
         build:
@@ -116,7 +116,7 @@ services:
             public:
                 ipv4_address: 192.168.30.5
         dns:
-          - "192.168.30.5:5300"
+          - "192.168.30.3:49700"
         ports:
           - "5300:53/udp"
 
@@ -148,7 +148,7 @@ services:
             public:
                 ipv4_address: 192.168.30.6
         dns:
-            - "192.168.30.5:5300"
+            - "192.168.30.3:49700"
 
 volumes:
     ssl_private:
