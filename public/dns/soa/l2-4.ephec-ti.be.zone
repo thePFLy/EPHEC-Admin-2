@@ -16,5 +16,5 @@ ns   IN A 79.137.81.65
 soa  IN A 79.137.81.65
 www  IN A 79.137.81.65
 mail IN A 79.137.81.65
-$INCLUDE Kl2-4.ephec-ti.be.+007+33734.key
-$INCLUDE Kl2-4.ephec-ti.be.+007+45243.key
+$INCLUDE Kl2-4.ephec-ti.be.+007+44524.key
+$INCLUDE Kl2-4.ephec-ti.be.+007+47622.key
