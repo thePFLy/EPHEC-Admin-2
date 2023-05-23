@@ -9,9 +9,9 @@ services:
                 ipv4_address: 192.168.30.2
         dns:
             - "192.168.30.3:49700"
-        volumes:
-            - ssl_private:/etc/ssl/private
-            - ssl_certs:/etc/ssl/certs
+        #volumes:
+        #    - ssl_private:/etc/ssl/private
+        #    - ssl_certs:/etc/ssl/certs
         ports:
             - "25:25"
             - "110:110"
