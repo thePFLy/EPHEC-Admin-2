@@ -30,8 +30,8 @@ RUN chown opendkim:opendkim /etc/opendkim/keys/mail.private
 COPY /spf/policyd-spf.conf /etc/postfix-policyd-spf-python/policyd-spf.conf
 
 # ssl script
-COPY ssl/init_ssl.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/init_ssl.sh
+#COPY ssl/init_ssl.sh /usr/local/bin/
+#RUN chmod +x /usr/local/bin/init_ssl.sh
 
 # config fichiers postfix
 COPY postfix/main.cf /etc/postfix/main.cf
@@ -65,4 +65,4 @@ EXPOSE 25 110 143 465 783 995 587
 
 # Lancement de postfix et dovecot
 # CMD /usr/sbin/postfix start && /usr/sbin/dovecot -F
-CMD ["/bin/bash", "-c", "/usr/local/bin/init_ssl.sh && /usr/sbin/postfix start && /usr/sbin/dovecot -F && /usr/sbin/spamassassin start"]
+CMD ["/bin/bash", "-c", "/usr/sbin/postfix start && /usr/sbin/dovecot -F && /usr/sbin/spamassassin start"]

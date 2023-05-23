@@ -14,25 +14,27 @@ maillog_file=/var/log/postfix.log
 debug_peer_list = l2-4.ephec-ti.be
 debug_peer_level = 5
 
-smtpd_tls_cert_file=/etc/ssl/certs/server.crt
-smtpd_tls_key_file=/etc/ssl/private/server.key
-smtpd_use_tls=yes
-smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
-smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
-smtpd_tls_cert_file=/etc/ssl/certs/server.crt
-smtpd_tls_key_file=/etc/ssl/private/server.key
-smtpd_use_tls=yes
-smtpd_tls_auth_only = yes
-smtp_tls_security_level = may
-smtpd_tls_security_level = may
+#smtpd_tls_cert_file=/etc/ssl/certs/server.crt
+#smtpd_tls_key_file=/etc/ssl/private/server.key
+#smtpd_use_tls=yes
+#smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+#smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+#smtpd_tls_cert_file=/etc/ssl/certs/server.crt
+#smtpd_tls_key_file=/etc/ssl/private/server.key
+#smtpd_use_tls=yes
+#smtpd_tls_auth_only = yes
+#smtp_tls_security_level = may
+#smtpd_tls_security_level = may
 
 smtpd_milters = unix:/var/run/opendkim/opendkim.sock
 non_smtpd_milters = unix:/var/run/opendkim/opendkim.sock
 
-policyd-spf_time_limit = 3600
 smtpd_recipient_restrictions =
-   permit_mynetworks,
-   permit_sasl_authenticated,
-   reject_unauth_destination,
-   check_policy_service unix:private/policyd-spf
+        permit_mynetworks
+        reject_unauth_destination
+        reject_unknown_sender_domain
+        reject_unknown_recipient_domain
+        check_policy_service unix:private/policy-spf
+
+
 
