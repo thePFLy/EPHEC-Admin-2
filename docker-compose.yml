@@ -8,10 +8,10 @@ services:
             public:
                 ipv4_address: 192.168.30.2
         dns:
-            - "192.168.30.3:49700"
-        #volumes:
-        #    - ssl_private:/etc/ssl/private
-        #    - ssl_certs:/etc/ssl/certs
+            - "192.168.30.5:53"
+        volumes:
+            - ssl_private:/etc/ssl/private
+            - ssl_certs:/etc/ssl/certs
         ports:
             - "25:25"
             - "110:110"
@@ -96,18 +96,6 @@ services:
     #             ipv4_address: 192.168.20.12
     #     dns: 192.168.20.3
 
-    dns:
-        build:
-            context: public/dns/resolver/
-            dockerfile: Dockerfile
-        networks:
-            public:
-                ipv4_address: 192.168.30.3
-        dns:
-            - "192.168.30.3:49700"
-        ports:
-            - "49700:53"
-
     soa:
         build:
             context: public/dns/soa/
@@ -115,10 +103,9 @@ services:
         networks:
             public:
                 ipv4_address: 192.168.30.5
-        dns:
-          - "192.168.30.3:49700"
         ports:
-          - "5300:53/udp"
+          - "53:53/udp"
+          - "53:53/tcp"
 
     # mail_public:
     #     build:
@@ -148,18 +135,18 @@ services:
             public:
                 ipv4_address: 192.168.30.6
         dns:
-            - "192.168.30.3:49700"
+            - "192.168.30.5:53"
 
 volumes:
     ssl_private:
     ssl_certs:
     mysqldata:
 networks:
-    intranet:
-        driver: bridge
-        ipam:
-            config:
-                - subnet: 192.168.20.0/24
+    #intranet:
+    #    driver: bridge
+    #    ipam:
+    #        config:
+    #            - subnet: 192.168.20.0/24
     public:
         driver: bridge
         ipam:
