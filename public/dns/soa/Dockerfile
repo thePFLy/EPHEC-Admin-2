@@ -12,5 +12,6 @@ COPY *.zone /etc/bind/
 COPY l2-4.ephec-ti.be.zone.signed /etc/bind/
 
 EXPOSE 53/udp
+EXPOSE 53/tcp
 
 CMD ["named", "-g"]
