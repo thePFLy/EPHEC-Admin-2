@@ -35,6 +35,3 @@ smtpd_recipient_restrictions =
         reject_unknown_sender_domain
         reject_unknown_recipient_domain
         check_policy_service unix:private/policy-spf
-
-
-

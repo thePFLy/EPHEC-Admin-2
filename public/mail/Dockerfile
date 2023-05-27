@@ -16,7 +16,7 @@ RUN apt update && \
         postfix-policyd-spf-python\
         spamc
 
-    
+
 VOLUME ["/ssl_private", "/ssl_certs"]
 
 # dkim
@@ -65,4 +65,4 @@ EXPOSE 25 110 143 465 783 995 587
 
 # Lancement de postfix et dovecot
 # CMD /usr/sbin/postfix start && /usr/sbin/dovecot -F
-CMD ["/bin/bash", "-c", "/usr/sbin/postfix start && /usr/sbin/dovecot -F && /usr/sbin/spamassassin start"]
+CMD ["/bin/bash", "-c", "/usr/local/bin/init_ssl.sh && /usr/sbin/postfix start && /usr/sbin/dovecot -F && /usr/sbin/spamassassin start"]
