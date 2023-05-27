@@ -11,6 +11,7 @@ $TTL 86400
 
 @   IN  NS      soa.l2-4.ephec-ti.be.
 @   IN  MX  10  mail.l2-4.ephec-ti.be.
+@   IN  A       79.137.81.65
 
 ns   IN A 79.137.81.65
 soa  IN A 79.137.81.65
