@@ -26,8 +26,10 @@ smtpd_tls_auth_only = yes
 smtp_tls_security_level = may
 smtpd_tls_security_level = may
 
-smtpd_milters = unix:/var/run/opendkim/opendkim.sock
-non_smtpd_milters = unix:/var/run/opendkim/opendkim.sock
+milter_default_action = accept
+milter_protocol = 6
+smtpd_milters = inet:localhost:12345
+non_smtpd_milters = inet:localhost:12345
 
 smtpd_recipient_restrictions =
         permit_mynetworks
@@ -35,3 +37,4 @@ smtpd_recipient_restrictions =
         reject_unknown_sender_domain
         reject_unknown_recipient_domain
         check_policy_service unix:private/policy-spf
+

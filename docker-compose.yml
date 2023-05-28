@@ -21,18 +21,6 @@ services:
             - "995:995"
             - "587:587"
 
-    # dns:
-    #     build:
-    #         context: intranet/DNS
-    #         dockerfile: Dockerfile
-    #     networks:
-    #         intranet:
-    #             ipv4_address: 192.168.20.3
-    #     dns: 192.168.20.3
-    #     ports:
-    #     - "5353:53"
-
-
     # nginx:
     #     image: nginx:1.23.3
     #     ports:
@@ -45,24 +33,6 @@ services:
     #     networks:
     #         intranet:
     #             ipv4_address: 192.168.20.4
-    #     dns: 192.168.20.3
-
-    # pc:
-    #     build:
-    #         context: intranet/pc
-    #         dockerfile: Dockerfile
-    #     networks:
-    #         intranet:
-    #             ipv4_address: 192.168.20.5
-    #     dns: 192.168.20.3
-
-    # pc2:
-    #     build:
-    #         context: intranet/pc
-    #         dockerfile: Dockerfile
-    #     networks:
-    #         intranet:
-    #             ipv4_address: 192.168.20.6
     #     dns: 192.168.20.3
 
     # php:
@@ -107,26 +77,6 @@ services:
           - "53:53/udp"
           - "53:53/tcp"
 
-    # mail_public:
-    #     build:
-    #         context: public/mail
-    #         dockerfile: Dockerfile
-    #     volumes:
-    #         - ssl_private:/etc/ssl/private
-    #         - ssl_certs:/etc/ssl/certs
-    #     networks:
-    #         public:
-    #             ipv4_address: 192.168.30.2
-    #     dns: 192.168.30.3:5300
-        # ports:
-        #     - "2525:25"
-        #     - "1100:110"
-        #     - "1430:143"
-        #     - "4650:465"
-        #     - "7830:783"
-        #     - "9950:995"
-        #     - "5870:587"
-
     pc_public:
         build:
             context: public/pc
@@ -152,4 +102,3 @@ networks:
         ipam:
             config:
                 - subnet: 192.168.30.0/24
-                                                            

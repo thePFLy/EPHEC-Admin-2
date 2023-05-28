@@ -5,7 +5,7 @@ $TTL 86400
                 2022031501  ; Serial
                 3600        ; Refresh
                 1800        ; Retry
-                604800      ; Expire
+                1209600     ; Expire
                 86400       ; Minimum TTL
                 )
 
@@ -19,6 +19,3 @@ www  IN A 79.137.81.65
 mail IN A 79.137.81.65
 $INCLUDE Kl2-4.ephec-ti.be.+007+44524.key
 $INCLUDE Kl2-4.ephec-ti.be.+007+47622.key
-l2-4.ephec-ti.be.     IN     TXT     "v=spf1 mx -all"
-v=DMARC1; p=none; pct=100; fo=1; rua=mailto:dmarc-reports@domain1.com
-_dmarc.l2-4.ephec-ti.be. IN TXT "v=DMARC1; p=quarantine; sp=quarantine; rua=mailto:tmpmail@l2-4.ephec-ti.be.; ruf=mailto:tmpmail@l2-4.ephec-ti.be.; fo=1"

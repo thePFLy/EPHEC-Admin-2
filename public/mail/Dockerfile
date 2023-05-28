@@ -14,17 +14,33 @@ RUN apt update && \
         opendkim\
         opendkim-tools\
         postfix-policyd-spf-python\
+        opendmarc\
         spamc
 
 
 VOLUME ["/ssl_private", "/ssl_certs"]
 
 # dkim
-RUN mkdir -p /etc/opendkim/keys
-COPY /opendkim/opendkim.conf /etc/opendkim.conf
-RUN opendkim-genkey -b 4096 -d l2-4.ephec-ti.be -D /etc/opendkim/keys -s mail -v
-RUN chown opendkim:opendkim /etc/opendkim/keys/mail.private
+RUN gpasswd -a postfix opendkim
+RUN mkdir -p /etc/opendkim/
+RUN mv /etc/opendkim.conf /etc/opendkim/
+RUN ln -s /etc/opendkim/opendkim.conf /etc/opendkim.conf
 
+#RUN openssl genrsa -out /etc/opendkim/opendkim.key 1024
+#RUN openssl rsa -in /etc/opendkim/opendkim.key -pubout -out /etc/opendkim/opendkim.pub.key
+COPY /opendkim/opendkim.key /etc/opendkim/opendkim.key
+COPY /opendkim/opendkim.pub.key /etc/opendkim/opendkim.pub.key
+RUN chmod "u=rw,o=,g=" /etc/opendkim/opendkim.key
+RUN chown opendkim:opendkim /etc/opendkim/opendkim.key
+
+COPY /opendkim/opendkim.conf /etc/opendkim/opendkim.conf
+
+COPY /opendkim/SigningTable /etc/opendkim/SigningTable
+COPY /opendkim/TrustedHosts /etc/opendkim/TrustedHosts
+COPY /opendkim/KeyTable /etc/opendkim/KeyTable
+
+#dmarc
+COPY /opendmarc/opendmarc.conf /etc/opendmarc.conf
 
 # spf
 COPY /spf/policyd-spf.conf /etc/postfix-policyd-spf-python/policyd-spf.conf

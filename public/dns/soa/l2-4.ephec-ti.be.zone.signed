@@ -4,7 +4,7 @@ l2-4.ephec-ti.be.       86400   IN SOA  ns.l2-4.ephec-ti.be. hostmaster.l2-4.eph
                                         2022031502 ; serial
                                         3600       ; refresh (1 hour)
                                         1800       ; retry (30 minutes)
-                                        604800     ; expire (1 week)
+                                        1209600    ; expire (1 week)
                                         86400      ; minimum (1 day)
                                         )
                         86400   RRSIG   SOA 7 3 86400 (
@@ -125,6 +125,7 @@ l2-4.ephec-ti.be.       86400   IN SOA  ns.l2-4.ephec-ti.be. hostmaster.l2-4.eph
                                         b9IitR8nVasyytVL5GctAJOPFZhv2V2bHIHV
                                         PYLTBgnm1fRAG3X9RD0BCH2mYctNGAIVp1V3
                                         iEfU4kyOHETx9/f4RA== )
+l2-4.ephec-ti.be.     IN     TXT     "v=spf1 mx -all"
 mail.l2-4.ephec-ti.be.  86400   IN A    79.137.81.65
                         86400   RRSIG   A 7 4 86400 (
                                         20230622122525 20230523122525 47622 l2-4.ephec-ti.be.
@@ -253,4 +254,6 @@ U3V7L33QJRSR0PQPR9L340EM77KF0QP5.l2-4.ephec-ti.be. 86400 IN NSEC3 1 1 0 D26439A7
                                         6ZAqsCQlRd8ykrcdOsPdPxfw5uxY+EDloXle
                                         8Ju92Cnmu6gt5zQe6g== )
 
-_dmarc              IN  TXT        ("v=DMARC1;p=reject;sp=reject;pct=10;adkim=r;aspf=r;fo=1;ri=86400")
+_dmarc           IN      TXT    ("v=DMARC1;p=reject;sp=reject;pct=10;"
+        "adkim=r;aspf=r;fo=1;ri=86400")
+dkim._domainkey 1000 IN TXT "v=DKIM1; k=rsa; t=y;  p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCg4g9vhjRnXC1vqSyUMSt11ukBw/b2a3NuCiZ9Dz73RdejxdDqvcLprsaILyLd348czLZ3RRs75GvzRJbSvNYTy5s7DhJ0Kphst8sQ86jZ84yZ1r6DyNl+YVZPQB406OzUk+/75geqXw13W8pFzbN4IS5wnclmQXc9NjFIWcH4hwIDAQAB;"
