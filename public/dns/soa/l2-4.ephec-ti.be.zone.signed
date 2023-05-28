@@ -252,3 +252,5 @@ U3V7L33QJRSR0PQPR9L340EM77KF0QP5.l2-4.ephec-ti.be. 86400 IN NSEC3 1 1 0 D26439A7
                                         DIsbI94B2cvGUJ1FAGw1Te9Cycn5jPS1zh/Z
                                         6ZAqsCQlRd8ykrcdOsPdPxfw5uxY+EDloXle
                                         8Ju92Cnmu6gt5zQe6g== )
+
+_dmarc              IN  TXT        ("v=DMARC1;p=reject;sp=reject;pct=10;adkim=r;aspf=r;fo=1;ri=86400")
