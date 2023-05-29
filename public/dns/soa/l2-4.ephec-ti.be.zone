@@ -1,0 +1,22 @@
+$ORIGIN l2-4.ephec-ti.be.
+$TTL 86400
+
+@   IN  SOA     ns.l2-4.ephec-ti.be. hostmaster.l2-4.ephec-ti.be. (
+                2022031501  ; Serial
+                3600        ; Refresh
+                1800        ; Retry
+                1209600     ; Expire
+                86400       ; Minimum TTL
+                )
+
+@   IN  NS      soa.l2-4.ephec-ti.be.
+@   IN  MX  10  mail.l2-4.ephec-ti.be.
+@   IN  A       79.137.81.65
+
+ns   IN A 79.137.81.65
+soa  IN A 79.137.81.65
+www  IN A 79.137.81.65
+mail IN A 79.137.81.65
+b2b  IN A 79.137.81.65
+$INCLUDE Kl2-4.ephec-ti.be.+007+03076.key
+$INCLUDE Kl2-4.ephec-ti.be.+007+09000.key
