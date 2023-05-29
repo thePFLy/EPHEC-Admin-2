@@ -1,0 +1,5 @@
+; This is a zone-signing key, keyid 9000, for l2-4.ephec-ti.be.
+; Created: 20230529115142 (Mon May 29 11:51:42 2023)
+; Publish: 20230529115142 (Mon May 29 11:51:42 2023)
+; Activate: 20230529115142 (Mon May 29 11:51:42 2023)
+l2-4.ephec-ti.be. IN DNSKEY 256 3 7 AwEAAb+0W774Fpyse0imympPNI4jvHgLtsXE+OGM6TFjidDYPA8Q9mYk QRuyKZHiKq033eZHWHUien1v+jefhZJNl2pshjh7OQ+45kMMGKBBIYmC b5+dMUheHgk/67njRBI5whCVLUy+KYDddVD5SFnKWkK3+/gBjvBnLEkN LPojQoCjGcycbRuZnaB6QW9dy7eVSJMXUEIokMu6zW9RGuj82YmK0EXe qaNQrqgXapAJq9ld17nUt5Qm9Eh8FQDUupfd8eyuBLVSd3AYKU9+R0er PtM/JNclRba12xk7D82FHIdY1TPLcD67WSez9UUy5Z9+ue4pDut+/Qmi hkX5GCZS5v8=
